@@ -13,7 +13,7 @@ class View {
 	public function _get() {
 		$data = $this->data;
 		ob_start();
-		require_once ( FW_VIEW . $this->view . '.tpl.php');
+		require_once ( PHPSFW_VIEW . $this->view . '.tpl.php');
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		return $buffer;

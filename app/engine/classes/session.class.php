@@ -10,8 +10,8 @@ class Session {
 	private $flash = false;
 	
 	function __construct() {
-		if (isset($_SESSION['FW_SESSION']) && $_SESSION['FW_SESSION']) {
-			$this->_setLoggedIn($_SESSION['FW_SESSION']);
+		if (isset($_SESSION['PHPSFW_SESSION']) && $_SESSION['PHPSFW_SESSION']) {
+			$this->_setLoggedIn($_SESSION['PHPSFW_SESSION']);
 		}
 		if (isset($_SESSION['flash'])) {
 			$this->flash = $_SESSION['flash'];
@@ -31,7 +31,7 @@ class Session {
 		
 	}
 	
-	/** Acceor for the current user ID
+	/** Accessor for the current user ID
 	 *  @returns int Returns the current logged in User ID
 	 */
 	public function _getID() {
@@ -60,18 +60,9 @@ class Session {
 		
 	}
 	
-	public function _setLoggedIn($uid) {
-		$_SESSION['partnership_uid'] = $uid;
-		$this->authorised = true;
-		$this->uid = $uid;
-		
-		$model = new Model_Users();
-		$this->privileges = $model->_getPrivileges($uid);
-	}
-	
 	public function logout() {
-		$_SESSION['FW_SESSION'] = false;
-		unset($_SESSION['FW_SESSION']);
+		$_SESSION['PHPSFW_SESSION'] = false;
+		unset($_SESSION['PHPSFW_SESSION']);
 		session_destroy();
 		session_start();
 		session_regenerate_id(true);

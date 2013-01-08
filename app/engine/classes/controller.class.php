@@ -138,10 +138,10 @@ class Controller {
 	}
 	
 	protected function loadClass($class) {
-		if (!file_exists(FW_APP . 'vendor/' . $class . '.php')) 
-			throw new Exception("File " . FW_APP . 'vendor/' . $class . '.php does not exist');
+		if (!file_exists(PHPSFW_APP . 'vendor/' . $class . '.php')) 
+			throw new Exception("File " . PHPSFW_APP . 'vendor/' . $class . '.php does not exist');
 		else 
-			require_once( FW_APP . 'vendor/' . $class . '.php' );
+			require_once( PHPSFW_APP . 'vendor/' . $class . '.php' );
 	}
 	
 }

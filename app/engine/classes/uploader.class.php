@@ -91,7 +91,7 @@ class Uploader {
 		if (substr($loc,strlen($loc)-1, 1) != "/")
 			$loc .= "/";
 		
-		move_uploaded_file($this->file['tmp_name'], FW_VIEW . $loc . $name . '.' . $this->extension);
+		move_uploaded_file($this->file['tmp_name'], PHPSFW_VIEW . $loc . $name . '.' . $this->extension);
 	}
 	
 	public static function UploadExists($filename) {

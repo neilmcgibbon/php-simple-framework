@@ -23,7 +23,7 @@ class Router {
 			$controller = "Home";
 		
 		$controller = strtolower($controller);
-		if ( !file_exists ( FW_CONTROLLER . $controller . '.class.php')) {
+		if ( !file_exists ( PHPSFW_CONTROLLER . $controller . '.class.php')) {
 			throw new Exception("Error");
 		} else {
 			$class = "Controller_" . $controller;

@@ -2,36 +2,33 @@
 
 class Model {
 	
-	static $mongo = NULL;
+	static $connection = NULL;
 	protected $db;
 	
 	function __construct() {
-		self::GetMongoConnection();
+		self::GetConnection();
 		$this->_setDB();
 	}
 	
 	protected function _setDB() {
-		$this->db = self::$mongo;
+		$this->db = self::$connection;
 	}
 	
 	private static function GetMongoConnection() {
 		
-		if (self::$mongo === null) {
-			$m = new Mongo();
-			self::$mongo = $m->mine;
+		if (self::$connection === null) {
+			/* Create database connection
+			 * e.g. for a Mongo connection : 
+                         *   $m = new Mongo();
+			 *   self::$connection = $m->collection;
+                         * or a mysqli connection:
+                         *   $m = new MySQLi('host','user','password','schema');
+			 *   self:$connection = $m;
+ 			 */
 		}
 		
 	}
 	
-	protected function returnObject($status, $message, $object = false) {
-		$ret = new stdClass;
-		$ret->status = $status;
-		$ret->message = $message;
-		if ($object)
-			$ret->data = $object;
-		
-		return $ret;
-	}
 	
 }
 
