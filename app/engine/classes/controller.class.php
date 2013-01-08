@@ -17,7 +17,7 @@ class Controller {
 	
 	protected $session;
 	
-	private $ajax = false;
+	private $use_full_template = true;
 	
 	function __construct() {
 		$this->__method = "__index";
@@ -27,11 +27,11 @@ class Controller {
 		$uri = explode('/', trim(trim($_SERVER['REDIRECT_URL'],'/')));
 		
 		if (count($uri) == 1 && $uri[0] == "")
-			$this->view = '/home/index';
+			$this->view = 'home' . DIRECTORY_SEPARATOR . 'index';
 		elseif (count($uri) == 1)
-			$this->view = $uri[0] . '/index';
+			$this->view = $uri[0] . DIRECTORY_SEPARATOR . 'index';
 		elseif (count($uri) > 1) {
-			$this->view = $uri[0] . '/' . $uri[1];
+			$this->view = $uri[0] . DIRECTORY_SEPARATOR . $uri[1];
 		}
 		
 		if (count($uri) > 2) {
@@ -45,21 +45,13 @@ class Controller {
 	
 	}
 	
-	public function _setAjax($bool) {
-		$this->ajax = $bool;
+	public function _setFullTemplate($bool) {
+		$this->use_full_template = $bool;
 	}
 	
 	public function control() {
 		$method = $this->_getMethod();
-		if ($method && method_exists($this, $method))
-			$this->{$method}();
-		else
-			$this->pageNotFound();
-	}
-	
-	protected function pageNotFound() {
-		$this->view = "error/page_not_found";
-		$this->view();
+		$this->{$method}();
 	}
 	
 	public function _getMethod() {
@@ -81,9 +73,9 @@ class Controller {
 							str_replace('-', ' ', 
 							trim($method)))));
 		if ($method && method_exists($this, $method))
-			$this->__method = $method;		
+			return $this->__method = $method;		
 		else
-			$this->pageNotFound();
+			return false;
 	}
 	
 	public function _setJS($location) {
@@ -107,8 +99,8 @@ class Controller {
 		
 		$html = '';
 		
-		if (!$this->ajax) 
-			$html .= $this->_getView("mods/header");
+		if ($this->use_full_template) 
+			$html .= $this->_getView("modules" . DIRECTORY_SEPARATOR . "header");
 			
 		foreach ($this->pre_views as $view) 
 			$html .= $this->_getView($view);
@@ -118,8 +110,8 @@ class Controller {
 		foreach ($this->post_views as $view) 
 			$html .= $this->_getView($view);
 
-		if (!$this->ajax) 
-			$html .= $this->_getView("mods/footer");
+		if ($this->use_full_template) 
+			$html .= $this->_getView("modules" . DIRECTORY_SEPARATOR . "footer");
 			
 		if ($return)
 			return $html;
@@ -128,8 +120,19 @@ class Controller {
 	}
 	
 	private function _getView($view) {
-		$view = new View($view, $this->view_data);
-		return $view->_get();
+		$view_object = new View($view, $this->view_data);
+		if (!$view_object->isValid()) {
+			if (PHPSFW_DEBUG_MODE)
+				return "<h1>View not found</h1><p><code>view: " . PHPSFW_VIEW . $view . ".tpl.php was not found.</code>";
+			else
+				return '';
+		} else {
+			return $view_object->_get();
+		}
+	}
+	
+	protected function _setView($view) {
+		$this->view = $view;
 	}
 	
 	protected function _setFlash($flash) {

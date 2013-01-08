@@ -3,6 +3,7 @@
 session_start();
 
 /* Base definitions */
+define ( 'PHPSFW_ROOT', PHPSFW_APP_ROOT . (substr(PHPSFW_APP_ROOT, strlen(PHPSFW_APP_ROOT)-1) == DIRECTORY_SEPARATOR ? '' : DIRECTORY_SEPARATOR) );
 define ( 'PHPSFW_APP', PHPSFW_ROOT . 'app/' );
 define ( 'PHPSFW_VIEW', PHPSFW_APP . 'view/' );
 define ( 'PHPSFW_CONTROLLER', PHPSFW_APP . 'controller/' );

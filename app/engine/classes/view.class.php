@@ -4,10 +4,17 @@ class View {
 	
 	private $view;
 	private $data;
+	private $is_valid = false;
 	
 	function __construct($view, $data) {
 		$this->view = $view;	
 		$this->data = $data;
+		
+		if (!file_exists( PHPSFW_VIEW . $this->view . '.tpl.php' ))
+			return;
+			
+		$this->is_valid = true;
+		return true;
 	}
 	
 	public function _get() {
@@ -27,6 +34,10 @@ class View {
 			return trim($_REQUEST[$var]);
 		
 		return $def ? $def : '';
+	}
+	
+	public function isValid() {
+		return $this->is_valid;
 	}
 }
 ?>

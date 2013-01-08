@@ -17,14 +17,17 @@ class Model {
 	private static function GetMongoConnection() {
 		
 		if (self::$connection === null) {
-			/* Create database connection
-			 * e.g. for a Mongo connection : 
-                         *   $m = new Mongo();
-			 *   self::$connection = $m->collection;
-                         * or a mysqli connection:
-                         *   $m = new MySQLi('host','user','password','schema');
-			 *   self:$connection = $m;
- 			 */
+			
+			switch (PHPSFW_DB_TYPE) {
+				case "mongodb":
+					$m = new Mongo();
+			 		self::$connection = $m->{PHPSFW_DB_SCHEMA};
+				break;
+				case "mysqli":
+					self::$connection = new MySQLi(PHPSFW_DB_HOST,PHPSFW_DB_USERNAME,PHPSFW_DB_PASSWORD,PHPSFW_DB_SCHEMA);
+				break;
+				default: break;
+			}
 		}
 		
 	}

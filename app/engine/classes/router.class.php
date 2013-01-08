@@ -23,15 +23,29 @@ class Router {
 			$controller = "Home";
 		
 		$controller = strtolower($controller);
-		if ( !file_exists ( PHPSFW_CONTROLLER . $controller . '.class.php')) {
-			throw new Exception("Error");
-		} else {
-			$class = "Controller_" . $controller;
-			$this->controller = new $class();
-		}
+		$class = "Controller_" . $controller;
 
-		if (isset($path[1]) && trim($path[1]) != "")
-			$this->controller->_setMethod(trim($path[1]));
+		try {
+			$this->controller = new $class();
+			if (isset($path[1]) && trim($path[1]) != "") {
+				$set_method = $this->controller->_setMethod(trim($path[1]));
+				if (!$set_method)
+					throw new Exception("Method not found");
+			}
+		} catch (Exception $e) {
+			$class = "Controller_Home";
+			$this->controller = new $class();	
+			
+			if (PHPSFW_DEBUG_MODE) {
+				if ($e->getMessage() == "Method not found")
+					$this->controller->_setMethod("method-not-found");
+				else
+					$this->controller->_setMethod("controller-not-found");
+			} else {
+				$this->controller->_setMethod("page-not-found");
+			}
+				
+		}
 			
 		
 	}

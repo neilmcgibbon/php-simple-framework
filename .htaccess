@@ -3,4 +3,4 @@ RewriteEngine On
 
 RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ /app/engine/router.php [QSA,L]
+RewriteRule ^(.*)$ app/engine/router.php [QSA,L]
