@@ -3,7 +3,6 @@
 session_start();
 
 /* Base definitions */
-
 define ( 'PHPSFW_APP', PHPSFW_ROOT . 'app/' );
 define ( 'PHPSFW_VIEW', PHPSFW_APP . 'view/' );
 define ( 'PHPSFW_CONTROLLER', PHPSFW_APP . 'controller/' );
@@ -19,7 +18,6 @@ require_once( PHPSFW_ENGINE . 'classes/model.class.php');
 require_once( PHPSFW_ENGINE . 'classes/view.class.php');
 require_once( PHPSFW_ENGINE . 'classes/controller.class.php');
 
-/* User definitions */
 
 /* autloader */
 
