@@ -4,20 +4,20 @@ session_start();
 
 /* Base definitions */
 
-define ( 'FW_APP', FW_ROOT . 'app/' );
-define ( 'FW_VIEW', FW_APP . 'view/' );
-define ( 'FW_CONTROLLER', FW_APP . 'controller/' );
-define ( 'FW_CACHE', FW_APP . 'view/_cache/' );
-define ( 'FW_ENGINE', FW_APP . 'engine/' );
+define ( 'PHPSFW_APP', PHPSFW_ROOT . 'app/' );
+define ( 'PHPSFW_VIEW', PHPSFW_APP . 'view/' );
+define ( 'PHPSFW_CONTROLLER', PHPSFW_APP . 'controller/' );
+define ( 'PHPSFW_CACHE', PHPSFW_APP . 'view/_cache/' );
+define ( 'PHPSFW_ENGINE', PHPSFW_APP . 'engine/' );
 
-require_once( FW_ENGINE . 'classes/router.class.php');
-require_once( FW_ENGINE . 'classes/exceptions.class.php');
-require_once( FW_ENGINE . 'classes/session.class.php');
-require_once( FW_ENGINE . 'classes/uploader.class.php');
+require_once( PHPSFW_ENGINE . 'classes/router.class.php');
+require_once( PHPSFW_ENGINE . 'classes/exceptions.class.php');
+require_once( PHPSFW_ENGINE . 'classes/session.class.php');
+require_once( PHPSFW_ENGINE . 'classes/uploader.class.php');
 
-require_once( FW_ENGINE . 'classes/model.class.php');
-require_once( FW_ENGINE . 'classes/view.class.php');
-require_once( FW_ENGINE . 'classes/controller.class.php');
+require_once( PHPSFW_ENGINE . 'classes/model.class.php');
+require_once( PHPSFW_ENGINE . 'classes/view.class.php');
+require_once( PHPSFW_ENGINE . 'classes/controller.class.php');
 
 /* User definitions */
 
@@ -30,10 +30,10 @@ spl_autoload_register(function ($class) {
 		$class_loc .= ($i == count($class_arr) - 1) ? strtolower($class_arr[$i]) . '.class.php' : strtolower($class_arr[$i]) . DIRECTORY_SEPARATOR;
 	
 	/* Try regular controllers */
-	if (file_exists ( FW_APP . $class_loc )) {
-		require_once( FW_APP . $class_loc);
+	if (file_exists ( PHPSFW_APP . $class_loc )) {
+		require_once( PHPSFW_APP . $class_loc);
 	} else {
-		throw new Exception("Class '" . $class . "' does not exist. (Looked for " . FW_APP . $class_loc . ")");
+		throw new Exception("Class '" . $class . "' does not exist. (Looked for " . PHPSFW_APP . $class_loc . ")");
 		die();
 	}
 });	
