@@ -20,7 +20,9 @@ i)   Download zip or clone using git.
   $ rm -rf php-simple-framework/.git
 ```
 ii)  Rename folder php-simple-framework to the name of your webroot (html, root, etc), or copy all the contents of php-simple-framework to your webroot (including the .htaccess file!
+
 iii) Enter your webroot and amend the config.php file as appropriate
+
 iv)  Give the webserver write permissions on the cache directory (ROOT_PATH/cache) : e.g. chmod 0777 cache
 
 And you should be good to go!
