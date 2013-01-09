@@ -1,0 +1,2 @@
+Place all your javascripts in this folder
+
