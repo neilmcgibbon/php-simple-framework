@@ -39,6 +39,6 @@ spl_autoload_register(function ($class) {
 
 /* Exception handler */
 
-set_exception_handler("Exceptions::Handle");
+set_exception_handler("PHPSFW_Exceptions::Handle");
 
 ?>

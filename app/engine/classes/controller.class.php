@@ -1,6 +1,6 @@
 <?php
 
-class Controller {
+class PHPSFW_Controller {
 	
 	protected $get;
 	protected $post;
@@ -38,7 +38,7 @@ class Controller {
 			for ($i = 2; $i < count($uri); $i++) 
 				$this->{"_arg" . ($i-1)} = $uri[$i];
 		}
-		$this->session = new Session();
+		$this->session = new PHPSFW_Session();
 		$this->view_data['authorised'] = $this->session->_getLoggedIn();
 		$this->view_data['flash'] = $this->session->_getFlash();
 		
@@ -120,7 +120,7 @@ class Controller {
 	}
 	
 	private function _getView($view) {
-		$view_object = new View($view, $this->view_data);
+		$view_object = new PHPSFW_View($view, $this->view_data);
 		if (!$view_object->isValid()) {
 			if (PHPSFW_DEBUG_MODE)
 				return "<h1>View not found</h1><p><code>view: " . PHPSFW_VIEW . $view . ".tpl.php was not found.</code>";

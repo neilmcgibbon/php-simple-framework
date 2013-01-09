@@ -1,6 +1,6 @@
 <?php
 
-class Session {
+class PHPSFW_Session {
 	
 	
 	private $authorised = false;

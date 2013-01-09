@@ -1,0 +1,7 @@
+This is the directorry for all of your third party PHP applications/classes
+e.g.
+
+app/
+  -> vendor/
+    -> foobar_app/
+      ->  foorbar.php

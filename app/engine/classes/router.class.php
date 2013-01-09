@@ -1,6 +1,6 @@
 <?php
 
-class Router {
+class PHPSFW_Router {
 	
 	private $path;
 	private $controller;

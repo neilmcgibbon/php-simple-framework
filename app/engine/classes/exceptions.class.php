@@ -1,6 +1,6 @@
 <?php
 
-class Exceptions {
+class PHPSFW_Exceptions {
 	
 	static function Handle($e) {
 		

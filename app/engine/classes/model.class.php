@@ -1,6 +1,6 @@
 <?php
 
-class Model {
+class PHPSFW_Model {
 	
 	static $connection = NULL;
 	protected $db;

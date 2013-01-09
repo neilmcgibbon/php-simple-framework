@@ -1,6 +1,6 @@
 <?php
 
-class View {
+class PHPSFW_View {
 	
 	private $view;
 	private $data;
