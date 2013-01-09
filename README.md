@@ -53,19 +53,16 @@ Here the controller is foo, the method is bar-none, and the view is also bar-non
 
 The controller should use the following convention and extending the declaration:
 ```php
-  <?php
   
   class Controller_Foo extends PHPSFW_Controller {
     
     // Default method on any controller is the tradition "index" method.
     public function __index() {
-      
       $this->view();
-    
     }
   }
   
-  ?>
+
 '''
 In addition, the bar-none method needs to be introduced to the controller.  Controller regular method names can be anything you like, but if they are a method from the URL,
 for example "bar-none" in the URL, then they are rewritten in camel case and prepended with a double undescore, as in the __index() function above.  So the bar-none method would look like this:
