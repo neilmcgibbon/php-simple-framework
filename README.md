@@ -57,51 +57,51 @@ Here the controller is foo, the method is bar-none, and the view is also bar-non
 The controller should use the following convention and extending the declaration:
 ```php
   
-  class Controller_Foo extends PHPSFW_Controller {
+class Controller_Foo extends PHPSFW_Controller {
     
-    // Default method on any controller is the tradition "index" method.
-    public function __index() {
-      $this->view();
-    }
+  // Default method on any controller is the tradition "index" method.
+  public function __index() {
+    $this->view();
   }
+}
 ```
 
 In addition, the bar-none method needs to be introduced to the controller.  Controller regular method names can be anything you like, but if they are a method from the URL,
 for example "bar-none" in the URL, then they are rewritten in camel case and prepended with a double undescore, as in the __index() function above.  So the bar-none method would look like this:
 ```php
-  //...
+//...
 
-  public function __barNone() {
-    $this->view();
-  }
+public function __barNone() {
+  $this->view();
+}
     
-  //...
+//...
 ```
 
 The controller method is where all logic and processing happens, before passing the processed data (if any) to the view.  For example, our bar-none method provides the view with today's date in
 the format "Monday, 15th June 2014".  Data is passed to the view in the view_data[] array:
 
 ```php
-  // ...
+// ...
 
-  public function __barNone() {
-    $date = $this->getFormattedDate();
-    $this->view_data['nice_date'] = $date;
-    $this->view();
-  }
+public function __barNone() {
+  $date = $this->getFormattedDate();
+  $this->view_data['nice_date'] = $date;
+  $this->view();
+}
 
-  private function getFormattedDate() {
-    return date('l, jS F Y');
-  }
+private function getFormattedDate() {
+  return date('l, jS F Y');
+}
   
-  //...
+//...
 ```
 
-The view can then display any data passed to it via a variable called $data.  So the view (app/view/foo/bar-none.tpl.php) may look like this:
+The view can then display any data passed to it via an array variable called $data.  So the view (app/view/foo/bar-none.tpl.php) may look like this:
 ```html
-  <div>
-    Today's date is <span> <?php echo $data['nice_date']; ?> </span>
-  </div>
+<div>
+  Today's date is <span> <?php echo $data['nice_date']; ?> </span>
+</div>
 ```
 
 
