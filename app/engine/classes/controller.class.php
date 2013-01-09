@@ -82,14 +82,14 @@ class PHPSFW_Controller {
 		if (preg_match('/^http/i', $location))
 			$this->javascripts[] = $location;
 		else
-			$this->javascripts[] = '/lib/js/' . $location .'.js';
+			$this->javascripts[] = '/web/lib/js/' . $location .'.js';
 	}
 	
 	public function _setCSS($location) {
 		if (preg_match('/^http/i', $location))
 			$this->stylesheets[] = $location;
 		else
-			$this->stylesheets[] = '/lib/css/' . $location .'.css';
+			$this->stylesheets[] = '/web/lib/css/' . $location .'.css';
 	}
 	
 	protected function view( $return = false ) {

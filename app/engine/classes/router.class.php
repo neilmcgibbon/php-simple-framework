@@ -33,7 +33,7 @@ class PHPSFW_Router {
 					throw new Exception("Method not found");
 			}
 		} catch (Exception $e) {
-			$class = "Controller_Home";
+			$class = "Controller_Error";
 			$this->controller = new $class();	
 			
 			if (PHPSFW_DEBUG_MODE) {
