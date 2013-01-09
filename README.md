@@ -61,60 +61,45 @@ The controller should use the following convention and extending the declaration
       $this->view();
     }
   }
-  
+```
 
-'''
 In addition, the bar-none method needs to be introduced to the controller.  Controller regular method names can be anything you like, but if they are a method from the URL,
 for example "bar-none" in the URL, then they are rewritten in camel case and prepended with a double undescore, as in the __index() function above.  So the bar-none method would look like this:
-
-  <?php
-
-  ...
+```php
+  //...
 
   public function __barNone() {
-
-   $this->view();
-  
+    $this->view();
   }
-  
-  ...
-  
-  ?>
+    
+  //...
+```
 
 The controller method is where all logic and processing happens, before passing the processed data (if any) to the view.  For example, our bar-none method provides the view with today's date in
 the format "Monday, 15th June 2014".  Data is passed to the view in the view_data[] array:
 
-  <?php
-  
-  ...
+```php
+  // ...
 
   public function __barNone() {
-
     $date = $this->getFormattedDate();
-
     $this->view_data['nice_date'] = $date;
-
     $this->view();
-
   }
 
   private function getFormattedDate() {
-
     return date('l, jS F Y');
-
   }
-
-  ...
-
-  ?>
+  
+  //...
+```
 
 The view can then display any data passed to it via a variable called $data.  So the view (app/view/foo/bar-none.tpl.php) may look like this:
-
+```html
   <div>
-
     Today's date is <span> <?php echo $data['nice_date']; ?> </span>
-
   </div>
+```
 
 
 
