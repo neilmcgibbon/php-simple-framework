@@ -10,14 +10,15 @@ Installation instructions:
 --------------------------
 
 i)   Download zip or clone using git.
-      - zip:
-         1: get file: https://github.com/neilmcgibbon/php-simple-framework/archive/master.zip
-         2: unzip contents
+```
+  # zip: 
+  $ wget https://github.com/neilmcgibbon/php-simple-framework/archive/master.zip
+  $ unzip master
 
-      - git:
-         1: git clone https://github.com/neilmcgibbon/php-simple-framework
-         2: If you aren't planning on further updates, or forking the repo, descend into folder php-simple-framework and remove the .git hidden folder.
-
+  # git:
+  $ git clone https://github.com/neilmcgibbon/php-simple-framework
+  $ rm -rf php-simple-framework/.git
+```
 ii)  Rename folder php-simple-framework to the name of your webroot (html, root, etc), or copy all the contents of php-simple-framework to your webroot (including the .htaccess file!
 iii) Enter your webroot and amend the config.php file as appropriate
 iv)  Give the webserver write permissions on the cache directory (ROOT_PATH/cache) : e.g. chmod 0777 cache
