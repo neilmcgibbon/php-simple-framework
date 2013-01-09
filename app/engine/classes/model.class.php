@@ -14,13 +14,16 @@ class PHPSFW_Model {
 		$this->db = self::$connection;
 	}
 	
-	private static function GetMongoConnection() {
+	private static function GetConnection() {
 		
 		if (self::$connection === null) {
 			
 			switch (PHPSFW_DB_TYPE) {
 				case "mongodb":
-					$m = new Mongo();
+					if (PHPSFW_DB_USERNAME == "")
+						$m = new MongoClient('mongodb://' . PHPSFW_DB_HOST);
+					else
+						$m = new MongoClient('mongodb://' . PHPSFW_DB_HOST . '/' . PHPSFW_DB_SCHEMA , array("username"=>PHPSFW_DB_USERNAME, "password"=>PHPSFW_DB_PASSWORD ));
 			 		self::$connection = $m->{PHPSFW_DB_SCHEMA};
 				break;
 				case "mysqli":
