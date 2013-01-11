@@ -4,7 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 
-<link rel="stylesheet" type="text/css" href="/lib/css/eric-meyer-css-reset-2.0.css" />
 <?php 
 foreach ($data['stylesheets'] as $stylesheet)
 	echo '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '" />' . PHP_EOL;;
