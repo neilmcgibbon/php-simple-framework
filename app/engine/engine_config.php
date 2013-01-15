@@ -1,5 +1,9 @@
 <?php
 
+/* Before we start the session, let's check if we are using an alternate session.save_path *.
+if ( defined ('PHPSFW_PHP_SESSION_SAVE_PATH' ) && false != PHPSFW_PHP_SESSION_SAVE_PATH)
+	ini_set('session.save_path', PHPSFW_PHP_SESSION_SAVE_PATH);
+
 session_start();
 
 /* Base definitions */
