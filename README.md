@@ -25,6 +25,8 @@ iii) Enter your webroot and amend the config.php file as appropriate
 
 iv)  Give the webserver write permissions on the cache directory (ROOT_PATH/cache) : e.g. chmod 0777 cache
 
+v)   If you are using Apache, the .htaccess is probably good out-of-the-box.  If you are using nginx though, copy the commented-out nginx config from the .htaccess file and place it in your ServerBlock configuration.  You can then delete the .htaccess file.
+
 And you should be good to go!
 
 
