@@ -6,7 +6,7 @@ class PHPSFW_Router {
 	private $controller;
 	
 	function __construct() {
-		$this->path = trim(trim($_SERVER['REDIRECT_URL']), '/');
+		$this->path = trim(trim($_SERVER['REQUEST_URI']), '/');
 
 		$this->processPath();
 		
