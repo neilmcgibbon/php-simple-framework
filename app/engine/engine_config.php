@@ -1,6 +1,6 @@
 <?php
 
-/* Before we start the session, let's check if we are using an alternate session.save_path *.
+/* Before we start the session, let's check if we are using an alternate session.save_path */
 if ( defined ('PHPSFW_PHP_SESSION_SAVE_PATH' ) && false != PHPSFW_PHP_SESSION_SAVE_PATH)
 	ini_set('session.save_path', PHPSFW_PHP_SESSION_SAVE_PATH);
 
@@ -35,9 +35,6 @@ spl_autoload_register(function ($class) {
 	/* Try regular controllers */
 	if (file_exists ( PHPSFW_APP . $class_loc )) {
 		require_once( PHPSFW_APP . $class_loc);
-	} else {
-		throw new Exception("Class '" . $class . "' does not exist. (Looked for " . PHPSFW_APP . $class_loc . ")");
-		die();
 	}
 });	
 

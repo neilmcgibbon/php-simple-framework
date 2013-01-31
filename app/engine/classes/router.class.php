@@ -6,7 +6,7 @@ class PHPSFW_Router {
 	private $controller;
 	
 	function __construct() {
-		$this->path = trim(trim($_SERVER['REQUEST_URI']), '/');
+                $this->path = trim(preg_replace('/^(.*)\?.*$/','$1',trim($_SERVER['REQUEST_URI'])),'/');
 
 		$this->processPath();
 		

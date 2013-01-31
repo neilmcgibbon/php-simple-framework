@@ -24,7 +24,7 @@ class PHPSFW_Controller {
 		$this->get = $_GET;
 		$this->post = $_POST;	
 		
-		$uri = explode('/', trim(trim($_SERVER['REQUEST_URI'],'/')));
+                $uri = explode('/', trim(preg_replace('/^(.*)\?.*$/', '$1', trim($_SERVER['REQUEST_URI'],'/')),'/'));
 		
 		if (count($uri) == 1 && $uri[0] == "")
 			$this->view = 'home' . DIRECTORY_SEPARATOR . 'index';
