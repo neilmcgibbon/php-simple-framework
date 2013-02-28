@@ -6,18 +6,18 @@ class PHPSFW_Router {
 	private $controller;
 	
 	function __construct() {
-                $this->path = trim(preg_replace('/^(.*)\?.*$/','$1',trim($_SERVER['REQUEST_URI'])),'/');
+		$this->path = trim(preg_replace('/^(.*)\?.*$/U','$1',trim($_SERVER['REQUEST_URI'])),'/');
 
 		$this->processPath();
 		
-		$this->controller->control();
+		$this->controller->control($this->path);
 		
 	}
 	
 	private function processPath() {
 		
 		$path = explode('/', $this->path);
-		
+				
 		$controller = trim($path[0]);
 		if ($controller == "")
 			$controller = "Home";
@@ -26,11 +26,15 @@ class PHPSFW_Router {
 		$class = "Controller_" . $controller;
 
 		try {
-			$this->controller = new $class();
-			if (isset($path[1]) && trim($path[1]) != "") {
-				$set_method = $this->controller->_setMethod(trim($path[1]));
-				if (!$set_method)
-					throw new Exception("Method not found");
+			if (class_exists($class)) {
+				$this->controller = new $class();
+				if (isset($path[1]) && trim($path[1]) != "") {
+					$set_method = $this->controller->_setMethod(trim($path[1]));
+					if (!$set_method)
+						throw new Exception("Method not found");
+				}
+			} else {
+				throw new Exception("Method not found");
 			}
 		} catch (Exception $e) {
 			$class = "Controller_Error";

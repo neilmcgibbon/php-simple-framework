@@ -4,6 +4,7 @@ class PHPSFW_Controller {
 	
 	protected $get;
 	protected $post;
+	protected $path;
 	
 	protected $view;
 	protected $view_data = array();
@@ -12,8 +13,10 @@ class PHPSFW_Controller {
 	protected $post_views = array();
 	protected $javascripts = array();
 	protected $stylesheets = array();
+	protected $hard_headers = array();
 	
 	protected $__method;
+	protected $redirect_to_index = false;
 	
 	protected $session;
 	
@@ -24,7 +27,7 @@ class PHPSFW_Controller {
 		$this->get = $_GET;
 		$this->post = $_POST;	
 		
-                $uri = explode('/', trim(preg_replace('/^(.*)\?.*$/', '$1', trim($_SERVER['REQUEST_URI'],'/')),'/'));
+		$uri = explode('/', trim(preg_replace('/^(.*)\?.*$/', '$1', trim($_SERVER['REQUEST_URI'],'/')),'/'));
 		
 		if (count($uri) == 1 && $uri[0] == "")
 			$this->view = 'home' . DIRECTORY_SEPARATOR . 'index';
@@ -45,11 +48,16 @@ class PHPSFW_Controller {
 	
 	}
 	
+	public function _setRedirectToIndex($bool) {
+		$this->redirect_to_index = $bool;
+	}
+	
 	public function _setFullTemplate($bool) {
 		$this->use_full_template = $bool;
 	}
 	
-	public function control() {
+	public function control($path) {
+		$this->path = $path;
 		$method = $this->_getMethod();
 		$this->{$method}();
 	}
@@ -67,6 +75,9 @@ class PHPSFW_Controller {
 	}
 	
 	public function _setMethod($method) {
+		if ($this->redirect_to_index == true)
+			return $this->__method = "__index";		
+
 		$method = "__" . lcfirst(
 							str_replace(' ','',
 							ucwords(
@@ -92,10 +103,15 @@ class PHPSFW_Controller {
 			$this->stylesheets[] = '/web/css/' . $location .'.css';
 	}
 	
+	public function _setHardHeader($string) {
+		$this->hard_headers[] = $string;
+	}
+	
 	protected function view( $return = false ) {
 		
 		$this->view_data['javascripts'] = $this->javascripts;
 		$this->view_data['stylesheets'] = $this->stylesheets;
+		$this->view_data['hard_headers'] = $this->hard_headers;
 		
 		$html = '';
 		
@@ -122,17 +138,25 @@ class PHPSFW_Controller {
 	private function _getView($view) {
 		$view_object = new PHPSFW_View($view, $this->view_data);
 		if (!$view_object->isValid()) {
+			$class = "Controller_Error";
+			$controller = new $class();	
 			if (PHPSFW_DEBUG_MODE)
-				return "<h1>View not found</h1><p><code>view: " . PHPSFW_VIEW . $view . ".tpl.php was not found.</code>";
+				$controller->_setMethod("view-not-found");
 			else
-				return '';
+				$controller->_setMethod("page-not-found");
+			return $controller->control($this->path);
 		} else {
-			return $view_object->_get();
+			return $view_object->_get($this->path);
 		}
 	}
 	
 	protected function _setView($view) {
 		$this->view = $view;
+	}
+	
+	protected function viewJSON($mixed) {
+		echo json_encode($mixed);
+		die();
 	}
 	
 	protected function _setFlash($flash) {

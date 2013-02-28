@@ -11,7 +11,7 @@ define ( 'PHPSFW_ROOT', PHPSFW_APP_ROOT . (substr(PHPSFW_APP_ROOT, strlen(PHPSFW
 define ( 'PHPSFW_APP', PHPSFW_ROOT . 'app/' );
 define ( 'PHPSFW_VIEW', PHPSFW_APP . 'view/' );
 define ( 'PHPSFW_CONTROLLER', PHPSFW_APP . 'controller/' );
-define ( 'PHPSFW_CACHE', PHPSFW_APP . 'view/_cache/' );
+define ( 'PHPSFW_CACHE', PHPSFW_ROOT . 'cache/' );
 define ( 'PHPSFW_ENGINE', PHPSFW_APP . 'engine/' );
 
 require_once( PHPSFW_ENGINE . 'classes/router.class.php');
