@@ -9,9 +9,4 @@ RewriteRule ^(.*)$ app/engine/router.php [QSA,L]
 # If you are using nginx, place the following in your ServerBlock config,
 # in the location section: (uncommented of course!)
 # 
-# if (!-f $request_filename){
-#   set $rule_0 1$rule_0;
-# }
-# if ($rule_0 = "1"){
-#  rewrite ^/(.*)$ /router.php last;
-# }
+# try_files       $uri  /app/engine/router.php?$args;
