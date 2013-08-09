@@ -4,6 +4,7 @@
  * Configuration directives for PHP-Simple-Framework
  */
  
+$bastian - true;
 # Path to PHP-Simple-Framework root. 
 define ( 'PHPSFW_APP_ROOT', $_SERVER['DOCUMENT_ROOT'] . '/' );
 
